@@ -14,3 +14,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.radial-gradient {
+  background: radial-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+}
