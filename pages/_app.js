@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import "../styles/tailwind.css";
+import "@reach/dialog/styles.css";
 import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
