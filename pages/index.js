@@ -148,9 +148,9 @@ export default function Home({ images, testimonials, videos }) {
             <h2 className="uppercase text-3xl font-extralight text-gray-800 tracking-widest text-center">
               Featured Film
             </h2>
-            <figure className="flex">
+            <figure className="flex mt-6">
               <img
-                className="object-contain w-2/3 px-5"
+                className="object-contain w-2/3 h-96 px-5"
                 src="./matt-krissy.jpg"
               />
               <blockquote className="w-1/3 px-5">
@@ -475,8 +475,6 @@ async function fetchInstagramImages() {
     );
 
     const json = await response.json();
-
-    console.log({ json });
 
     if (json.data) {
       data = json.data.map((media) => media.media_url);
