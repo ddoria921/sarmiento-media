@@ -271,7 +271,7 @@ export default function Home({ images, testimonials, videos }) {
 
             <div className="mt-12 flex justify-center">
               <span className="border-b border-gray-400 pb-6">
-                <ButtonLink>Schedule a consultation</ButtonLink>
+                <ButtonLink href="#">Schedule a consultation</ButtonLink>
               </span>
             </div>
           </div>
