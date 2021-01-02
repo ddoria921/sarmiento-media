@@ -2,9 +2,14 @@ import ButtonLink from "../components/button-link";
 import Footer from "../components/footer";
 import InstagramSection from "../components/instagram-section";
 import Nav from "../components/nav";
-import { getInstagramImages } from "../lib/api";
+import VideoPreview from "../components/video-preview";
+import { getInstagramImages, fetchFromVimeo } from "../lib/api";
+import { MACKENZIE_THOMAS_URI } from "../lib/constants";
 
-export default function FilmPackages({ images }) {
+export default function FilmPackages({ images, weddingVideo }) {
+  const [videoTitle] = weddingVideo.name?.split("|");
+  const videoImageUrl = weddingVideo.pictures.sizes[5].link;
+
   return (
     <div>
       <Nav />
@@ -40,7 +45,11 @@ export default function FilmPackages({ images }) {
               </div>
             </div>
             <div className="pl-12 w-1/2">
-              <img src="./william-2.jpg" />
+              <VideoPreview
+                imageUrl="./MT-2.jpg"
+                title={videoTitle}
+                videoData={weddingVideo}
+              />
             </div>
           </div>
         </section>
@@ -141,9 +150,12 @@ function FilmPackage({ children, imageUrl, name }) {
 }
 
 export async function getStaticProps() {
-  const [images] = await Promise.all([getInstagramImages()]);
+  const [images, weddingVideo] = await Promise.all([
+    getInstagramImages(),
+    fetchFromVimeo(MACKENZIE_THOMAS_URI),
+  ]);
 
   return {
-    props: { images },
+    props: { images, weddingVideo },
   };
 }
