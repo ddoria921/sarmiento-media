@@ -71,7 +71,7 @@ export default function FilmPackages({ images }) {
 
           <div className="w-2/3 mx-auto my-12 h-px bg-gray-200"></div>
 
-          <FilmPackage name="Meslier" imageUrl="./Meslier.jpg">
+          <FilmPackage name="Meslier" imageUrl="./meslier.jpg">
             <li>Up to twelve hours of wedding day coverage</li>
             <li>7-9 minute highlight film </li>
             <li>Recorded letters by bride/groom </li>
@@ -129,7 +129,7 @@ function FilmPackage({ children, imageUrl, name }) {
         </div>
         <div className="flex-shrink flex p-6">
           <img
-            className="w-full object-contain"
+            className="w-full h-full object-contain"
             src={imageUrl}
             alt=""
             role="presentation"
