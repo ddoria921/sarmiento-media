@@ -1,3 +1,16 @@
+@font-face {
+  font-family: "High Tide";
+  src: url("/fonts/high_tide/high_tide-webfont.eot");
+  src: url("/fonts/high_tide/high_tide-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fonts/high_tide/high_tide-webfont.woff2") format("woff2"),
+    url("/fonts/high_tide/high_tide-webfont.woff") format("woff"),
+    url("/fonts/high_tide/high_tide-webfont.ttf") format("truetype"),
+    url("/fonts/high_tide/high_tide-webfont.svg#high_tideregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
 html,
 body {
   padding: 0;
@@ -17,4 +30,8 @@ a {
 
 .radial-gradient {
   background: radial-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+}
+
+.hero-container {
+  height: calc(100vh - 9rem);
 }
