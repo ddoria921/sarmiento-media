@@ -203,6 +203,7 @@ export default function Home({ images, testimonials, videos }) {
           </div>
         </section>
 
+        {/* Why Choose Me? */}
         <section className="py-12 px-4 bg-gray-200">
           <div className="flex max-w-4xl mx-auto lg:max-w-6xl">
             <div className="w-1/2">
@@ -233,7 +234,8 @@ export default function Home({ images, testimonials, videos }) {
           </div>
         </section>
 
-        <section className="py-12 px-4">
+        {/* Films */}
+        <section className="py-12 px-4" id="films">
           <div className="max-w-4xl mx-auto lg:max-w-6xl">
             <h2 className="uppercase text-3xl font-extralight text-gray-800 border-gray-900 border-b border-t w-64 text-center mx-auto tracking-widest py-1">
               More Films
