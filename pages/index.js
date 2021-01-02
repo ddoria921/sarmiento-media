@@ -72,14 +72,14 @@ export default function Home({ images, testimonials, videos }) {
       <Nav />
       <main>
         <section className="aspect-w-16 aspect-h-7">
-          <video
+          {/* <video
             autoPlay={true}
             className="object-cover"
             controls={false}
             loop={true}
             muted={true}
             src="./wedding-intro-video.mp4"
-          ></video>
+          ></video> */}
         </section>
 
         <section className="py-12 px-4">
