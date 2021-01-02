@@ -128,10 +128,10 @@ export default function MeetWill({ images }) {
         </section>
 
         <section className="py-12 px-4 max-w-3xl mx-auto">
-          <h2 className="uppercase text-4xl font-light tracking-widest text-gray-700 text-center">
+          <h2 className="uppercase text-4xl font-thin tracking-widest text-gray-700 text-center">
             Focus on quality
           </h2>
-          <p className="text-center uppercase text-gray-500 mt-8">
+          <p className="text-center uppercase text-gray-500 mt-8 font-extralight">
             Will studied aeronautical engineering at purdue university and works
             full time in washington d.c. during his time at purdue, he developed
             his creative design process and taught himself the art of video
