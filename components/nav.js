@@ -30,7 +30,7 @@ export default function Nav() {
             </Link>
           </li>
           <li className="pr-4 self-center uppercase text-xs font-semibold">
-            <Link href="/film-packages">
+            <Link href="/commercial">
               <a>Commercial</a>
             </Link>
           </li>
