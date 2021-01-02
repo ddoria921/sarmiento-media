@@ -1,16 +1,24 @@
-import Head from "next/head";
-import Link from "next/link";
-import Button from "../components/button";
-import ButtonLink from "../components/button-link";
-import ImageGallery from "../components/image-gallery";
-import styles from "../styles/Home.module.css";
-import { Dialog, DialogOverlay, DialogContent } from "@reach/dialog";
+import { DialogOverlay, DialogContent } from "@reach/dialog";
 import { useState } from "react";
 import VisuallyHidden from "@reach/visually-hidden";
 
-const MACKENZIE_THOMAS_URI = "videos/353043176";
-const KRISTINE_JAMES_URI = "videos/342488705";
-const KIM_JOSH_URI = "videos/277789606";
+import Button from "../components/button";
+import ButtonLink from "../components/button-link";
+import ImageGallery from "../components/image-gallery";
+import Footer from "../components/footer";
+import Nav from "../components/nav";
+
+import {
+  getInstagramImages,
+  getTestimonialVideos,
+  getVimeoVideos,
+} from "../lib/api";
+import {
+  KIM_JOSH_URI,
+  KRISTINE_JAMES_URI,
+  MACKENZIE_THOMAS_URI,
+} from "../lib/constants";
+import InstagramSection from "../components/instagram-section";
 
 export default function Home({ images, testimonials, videos }) {
   const dialogContentStyles = {
@@ -61,41 +69,7 @@ export default function Home({ images, testimonials, videos }) {
 
   return (
     <div>
-      <header className="flex h-36 bg-white">
-        <img
-          className="h-full p-10 object-contain box-border"
-          src="./sarmiento-media-logo.png"
-        />
-        <nav className="flex-grow">
-          <ul className="flex justify-end h-full">
-            <li className="pr-4 self-center uppercase text-xs font-semibold">
-              <Link href="/">
-                <a>Home</a>
-              </Link>
-            </li>
-            <li className="pr-4 self-center uppercase text-xs font-semibold">
-              <Link href="/film-packages">
-                <a>Film Packages</a>
-              </Link>
-            </li>
-            <li className="pr-4 self-center uppercase text-xs font-semibold">
-              <Link href="/meet-will">
-                <a>Meet Will</a>
-              </Link>
-            </li>
-            <li className="pr-4 self-center uppercase text-xs font-semibold">
-              <Link href="/contact">
-                <a>Contact</a>
-              </Link>
-            </li>
-            <li className="pr-4 self-center uppercase text-xs font-semibold">
-              <Link href="/film-packages">
-                <a>Commercial</a>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <Nav />
       <main>
         <section className="aspect-w-16 aspect-h-7">
           <video
@@ -143,6 +117,7 @@ export default function Home({ images, testimonials, videos }) {
           </div>
         </section>
 
+        {/* Featured Film */}
         <section className="bg-gray-100 py-12 px-4">
           <div className="max-w-4xl mx-auto lg:max-w-6xl">
             <h2 className="uppercase text-3xl font-extralight text-gray-800 tracking-widest text-center">
@@ -176,7 +151,8 @@ export default function Home({ images, testimonials, videos }) {
           </div>
         </section>
 
-        <section className="py-12 px-4">
+        {/* Testimonials */}
+        <section className="py-12 px-4" id="testimonials">
           <div className="max-w-4xl mx-auto lg:max-w-6xl">
             <h2 className="uppercase text-3xl font-extralight text-gray-800 border-gray-900 border-b">
               + Words from My Couples&#8230;
@@ -277,24 +253,10 @@ export default function Home({ images, testimonials, videos }) {
           </div>
         </section>
 
-        <section className="py-12 px-4 bg-gray-900">
-          <div className="max-w-xl mx-auto lg:max-w-3xl">
-            <h3 className="lowercase text-3xl text-gray-100 text-center font-thin italic">
-              Find me on Instagram
-            </h3>
-            <h4 className="uppercase text-lg text-gray-400 text-center my-4">
-              @bywillsarmiento
-            </h4>
-            <InstagramGallery images={images} />
-          </div>
-        </section>
+        <InstagramSection images={images} />
       </main>
 
-      <footer className="bg-black py-8">
-        <p className="w-full text-xs text-gray-100 text-center py-8">
-          © 2020 Sarmiento Media. All rights reserved
-        </p>
-      </footer>
+      <Footer />
 
       <DialogOverlay
         style={{ background: "rgba(0, 0, 0, 0.9)", zIndex: "100" }}
@@ -402,160 +364,11 @@ function XIcon(props) {
   );
 }
 
-function InstagramGallery({ className, images }) {
-  return (
-    <div className={`w-full ${className}`.trim()}>
-      <a
-        className="flex w-56 group"
-        href="https://www.instagram.com/bywillsarmiento/"
-        rel="noopener nofollow"
-        target="_blank"
-        title="@bywillsarmiento"
-      >
-        <div className="w-12 h-12 p-0.5 box-content rounded-full overflow-hidden relative">
-          <img
-            className="absolute inset-0"
-            src="https://secureservercdn.net/198.71.233.138/ypq.139.myftpupload.com/wp-content/uploads/sb-instagram-feed-images/bywillsarmiento.jpg"
-            alt=""
-          />
-          <div className="absolute inset-0 z-10 flex justify-center">
-            <div className="absolute inset-0 bg-black opacity-0 z-0 group-hover:opacity-70 transition-opacity ease-in-out"></div>
-            <InstagramIcon className="z-10 w-6 h-6 self-center opacity-0 group-hover:opacity-100 transition-opacity ease-in-out" />
-          </div>
-        </div>
-        <div className="pl-4 font-semibold self-center text-gray-100">
-          bywillsarmiento
-        </div>
-      </a>
-      <div className="grid grid-cols-4 gap-2 mt-6">
-        {images &&
-          images.slice(0, 8).map((imageUrl, i) => {
-            return (
-              <div className="" key={i}>
-                <img className="w-full h-full object-cover" src={imageUrl} />
-              </div>
-            );
-          })}
-      </div>
-    </div>
-  );
-}
-
-function InstagramIcon({ className }) {
-  return (
-    <svg
-      aria-hidden="true"
-      aria-label="Instagram"
-      className={className}
-      role="img"
-      viewBox="0 0 450 450"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M225.1 110c-63.6 0-114.9 51.3-114.9 114.9 0 63.6 51.3 114.9 114.9 114.9 63.6 0 114.9-51.3 114.9-114.9 0-63.6-51.3-114.9-114.9-114.9zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7h0zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0C96.8 4.1 65 12.3 38.7 38.5c-26.3 26.2-34.4 58-36.2 93.9-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9 26.3 26.2 58 34.4 93.9 36.2 37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399.8 357c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9-32.6 0-102.7 2.6-132.1-9-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1 0-32.6-2.6-102.7 9-132.1C58.2 73.2 73.3 58.1 93 50.2c29.5-11.7 99.5-9 132.1-9 32.6 0 102.7-2.6 132.1 9 19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1 0 32.6 2.7 102.7-9 132.1z"
-        fill="#FFF"
-        fillRule="nonzero"
-        stroke="#FFF"
-      />
-    </svg>
-  );
-}
-
-async function fetchInstagramImages() {
-  let data = [];
-  const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
-
-  try {
-    const response = await fetch(
-      `https://graph.instagram.com/17841400687600145/media?fields=id,media_type,media_url,username,timestamp&access_token=${accessToken}`,
-      {
-        method: "GET",
-        headers: {},
-      }
-    );
-
-    const json = await response.json();
-
-    if (json.data) {
-      data = json.data.map((media) => media.media_url);
-    }
-  } catch (error) {
-    console.error(error);
-  }
-
-  return data;
-}
-
-async function fetchVimeoVideos() {
-  let data = [];
-  const accessToken = process.env.VIMEO_ACCESS_TOKEN;
-
-  try {
-    const response = await fetch(
-      "https://api.vimeo.com/users/78218633/videos?per_page=12",
-      {
-        method: "GET",
-        headers: {
-          Authorization: `bearer ${accessToken}`,
-        },
-      }
-    );
-
-    const json = await response.json();
-
-    if (json.data) {
-      data = json.data;
-    }
-  } catch (error) {
-    console.error(error);
-  }
-
-  return data;
-}
-
-async function fetchFromVimeo(path) {
-  const accessToken = process.env.VIMEO_ACCESS_TOKEN;
-  let data = [];
-
-  try {
-    const response = await fetch(`https://api.vimeo.com/${path}`, {
-      method: "GET",
-      headers: {
-        Authorization: `bearer ${accessToken}`,
-      },
-    });
-
-    const json = await response.json();
-
-    if (json.data) {
-      data = json.data;
-    } else {
-      data = json;
-    }
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-
-  return data;
-}
-
-async function fetchTestimonialVideos() {
-  const testimonialIds = [
-    MACKENZIE_THOMAS_URI,
-    KRISTINE_JAMES_URI,
-    KIM_JOSH_URI,
-  ];
-  const data = await Promise.all(testimonialIds.map(fetchFromVimeo));
-
-  return data;
-}
-
 export async function getStaticProps() {
   const [images, testimonials, videos] = await Promise.all([
-    fetchInstagramImages(),
-    fetchTestimonialVideos(),
-    fetchVimeoVideos(),
+    getInstagramImages(),
+    getTestimonialVideos(),
+    getVimeoVideos(),
   ]);
 
   return {

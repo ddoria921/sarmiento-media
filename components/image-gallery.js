@@ -39,7 +39,7 @@ export default function ImageGallery({ images, onImageClick }) {
   );
 }
 
-function ImageGalleryCard({ show, src, title }) {
+function ImageGalleryCard({ show = true, src, title }) {
   const containerStyle = {
     transitionTimingFunction: "cubic-bezier(0.25, 1, 0.5, 1)",
   };
@@ -47,7 +47,7 @@ function ImageGalleryCard({ show, src, title }) {
   return (
     <div
       className={`w-full h-full relative transition duration-500 transform ${
-        show ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+        show ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"
       }`}
       style={containerStyle}
     >
