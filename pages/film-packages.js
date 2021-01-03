@@ -2,7 +2,7 @@ import ButtonLink from "../components/button-link";
 import Footer from "../components/footer";
 import InstagramSection from "../components/instagram-section";
 import Nav from "../components/nav";
-import VideoPreview from "../components/video-preview";
+import VimeoVideo from "../components/vimeo-video";
 import { getInstagramImages, fetchFromVimeo } from "../lib/api";
 import { MACKENZIE_THOMAS_URI } from "../lib/constants";
 
@@ -45,7 +45,7 @@ export default function FilmPackages({ images, weddingVideo }) {
               </div>
             </div>
             <div className="pl-12 w-1/2">
-              <VideoPreview
+              <VimeoVideo
                 imageUrl="./MT-2.jpg"
                 title={videoTitle}
                 videoData={weddingVideo}

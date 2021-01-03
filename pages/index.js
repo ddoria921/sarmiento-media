@@ -1,12 +1,12 @@
-import { DialogOverlay, DialogContent } from "@reach/dialog";
 import { useState } from "react";
-import VisuallyHidden from "@reach/visually-hidden";
 
 import Button from "../components/button";
 import ButtonLink from "../components/button-link";
-import ImageGallery from "../components/image-gallery";
+import VimeoVideoGallery from "../components/vimeo-video-gallery";
 import Footer from "../components/footer";
 import Nav from "../components/nav";
+import InstagramSection from "../components/instagram-section";
+import VimeoVideoModal from "../components/vimeo-video-modal";
 
 import {
   getInstagramImages,
@@ -18,54 +18,19 @@ import {
   KRISTINE_JAMES_URI,
   MACKENZIE_THOMAS_URI,
 } from "../lib/constants";
-import InstagramSection from "../components/instagram-section";
 
 export default function Home({ images, testimonials, videos }) {
-  const dialogContentStyles = {
-    width: "100%",
-    margin: "0px",
-    position: "absolute",
-    top: "50%",
-    transform: "translateY(-50%)",
-    padding: "1rem 3rem",
-    background: "none",
-  };
+  const [showDialog, setShowDialog] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
-  const vimeoImages = videos.map((v) => {
-    const [videoTitle] = v.name?.split("|");
-    return {
-      title: videoTitle,
-      imageUrl: v.pictures.sizes[5].link,
-    };
-  });
+  const openDialog = () => setShowDialog(true);
+  const closeDialog = () => setShowDialog(false);
 
   const showTestimonial = (id) => {
     const video = testimonials.find((video) => video.uri.includes(id));
-    const iframeString = video.embed.html;
-    const iframe = iframeString
-      .replace('width="1920"', 'width="100%"')
-      .replace('height="1080"', 'height="100%"');
-
     setSelectedVideo(video);
-    setVimeoIframe(iframe);
-    setShowDialog(true);
+    openDialog();
   };
-
-  const [showDialog, setShowDialog] = useState(false);
-  const [selectedVideo, setSelectedVideo] = useState(null);
-  const [vimeoIframe, setVimeoIframe] = useState("");
-  const openDialogWithVideo = (videoId) => {
-    const iframeString = videos[videoId].embed.html;
-    const iframe = iframeString
-      .replace('width="1920"', 'width="100%"')
-      .replace('height="1080"', 'height="100%"');
-
-    setSelectedVideo(videos[videoId]);
-    setVimeoIframe(iframe);
-    setShowDialog(true);
-  };
-
-  const closeDialog = () => setShowDialog(false);
 
   return (
     <div>
@@ -241,10 +206,7 @@ export default function Home({ images, testimonials, videos }) {
               More Films
             </h2>
             <div className="mt-12">
-              <ImageGallery
-                images={vimeoImages}
-                onImageClick={openDialogWithVideo}
-              />
+              <VimeoVideoGallery videos={videos} />
             </div>
 
             <div className="mt-12 flex justify-center">
@@ -260,25 +222,11 @@ export default function Home({ images, testimonials, videos }) {
 
       <Footer />
 
-      <DialogOverlay
-        style={{ background: "rgba(0, 0, 0, 0.9)", zIndex: "100" }}
+      <VimeoVideoModal
+        video={selectedVideo}
         isOpen={showDialog}
         onDismiss={closeDialog}
-      >
-        <DialogContent
-          aria-label={`${selectedVideo?.description}`}
-          style={dialogContentStyles}
-        >
-          <button className="fixed -top-6 right-12" onClick={closeDialog}>
-            <VisuallyHidden>Close</VisuallyHidden>
-            <XIcon aria-hidden className="w-6 h-6 text-white" />
-          </button>
-          <div
-            className="aspect-w-16 aspect-h-9"
-            dangerouslySetInnerHTML={{ __html: vimeoIframe }}
-          ></div>
-        </DialogContent>
-      </DialogOverlay>
+      />
     </div>
   );
 }
@@ -343,25 +291,6 @@ function QuoteLeftIcon() {
         fill="currentColor"
         d="M464 256h-80v-64a64 64 0 0164-64h8a24 24 0 0024-24V56a24 24 0 00-24-24h-8a160 160 0 00-160 160v240a48 48 0 0048 48h128a48 48 0 0048-48V304a48 48 0 00-48-48zm-288 0H96v-64a64 64 0 0164-64h8a24 24 0 0024-24V56a24 24 0 00-24-24h-8A160 160 0 000 192v240a48 48 0 0048 48h128a48 48 0 0048-48V304a48 48 0 00-48-48z"
       />
-    </svg>
-  );
-}
-
-function XIcon(props) {
-  return (
-    <svg
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M6 18L18 6M6 6l12 12"
-      ></path>
     </svg>
   );
 }
