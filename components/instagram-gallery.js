@@ -70,7 +70,7 @@ function InstagramMediaLabel({ type = "" }) {
   const labelType = type.toLowerCase().replace("_", "-");
   return (
     <span
-      className={`media-label ${labelType} block absolute top-0 right-0`}
+      className={`instagram-media-label ${labelType} block absolute top-0 right-0`}
     ></span>
   );
 }
