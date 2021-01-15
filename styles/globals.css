@@ -35,3 +35,24 @@ a {
 .hero-container {
   height: calc(100vh - 9rem);
 }
+
+.instagram-media-label {
+  background-image: url(/instagram-media-types.png);
+  background-size: 65px 65px;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  height: 32px;
+  width: 32px;
+}
+
+.instagram-media-label.video {
+  background-position: bottom left;
+}
+
+.instagram-media-label.carousel-album {
+  background-position: top left;
+}
+
+.instagram-media-label.image {
+  background-position: bottom right;
+}
