@@ -2,6 +2,7 @@ import ButtonLink from "../components/button-link";
 import Footer from "../components/footer";
 import InstagramSection from "../components/instagram-section";
 import Nav from "../components/nav";
+import PricingSection from "../components/pricing-section";
 import VimeoVideo from "../components/vimeo-video";
 import { getInstagramImages, fetchFromVimeo } from "../lib/api";
 import { MACKENZIE_THOMAS_URI } from "../lib/constants";
@@ -64,8 +65,12 @@ export default function FilmPackages({ images, weddingVideo }) {
           </div>
         </section>
 
+        <section>
+          <PricingSection />
+        </section>
+
         {/* Film packages */}
-        <section className="py-12 px-4 max-w-6xl mx-auto">
+        {/* <section className="py-12 px-4 max-w-6xl mx-auto">
           <h2 className="text-center uppercase text-3xl font-thin text-gray-700">
             Film Packages
           </h2>
@@ -105,7 +110,7 @@ export default function FilmPackages({ images, weddingVideo }) {
             <li>Unique aerial drone footage*</li>
             <li>1 hour sunrise/sunset shoot</li>
           </FilmPackage>
-        </section>
+        </section> */}
 
         {/* PDF Download */}
         <section className="py-24 px-4">
